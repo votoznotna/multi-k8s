@@ -3,20 +3,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t votoznotna/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t antonzotov/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true votoznotna/react-test npm test
+  - docker run -e CI=true antonzotov/react-test npm test
 
 after_success:
-  - docker build -t votoznotna/multi-client ./client
-  - docker build -t votoznotna/multi-nginx ./nginx
-  - docker build -t votoznotna/multi-server ./server
-  - docker build -t votoznotna/multi-worker ./worker
+  - docker build -t antonzotov/multi-client ./client
+  - docker build -t antonzotov/multi-nginx ./nginx
+  - docker build -t antonzotov/multi-server ./server
+  - docker build -t antonzotov/multi-worker ./worker
   # Log in to the docker Cli
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push votoznotna/multi-client
-  - docker push votoznotna/multi-nginx
-  - docker push votoznotna/multi-server
-  - docker push votoznotna/multi-worker
+  - docker push antonzotov/multi-client
+  - docker push antonzotov/multi-nginx
+  - docker push antonzotov/multi-server
+  - docker push antonzotov/multi-worker
