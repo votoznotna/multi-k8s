@@ -13,3 +13,10 @@ after_success:
   - docker build -t votoznotna/multi-nginx ./nginx
   - docker build -t votoznotna/multi-server ./server
   - docker build -t votoznotna/multi-worker ./worker
+  # Log in to the docker Cli
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push votoznotna/multi-client
+  - docker push votoznotna/multi-nginx
+  - docker push votoznotna/multi-server
+  - docker push votoznotna/multi-worker
