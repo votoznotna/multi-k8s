@@ -16,7 +16,7 @@ class Fib extends Component {
   async fetchValues() {
     const values = await axios.get("/api/values/current");
     this.setState({
-      values: values && values.data && values.data instanceof Array,
+      values: !!values && values.data,
     });
   }
 
@@ -24,7 +24,10 @@ class Fib extends Component {
     const seenIndexes = await axios.get("/api/values/all");
     this.setState({
       seenIndexes:
-        seenIndexes && seenIndexes.data && seenIndexes.data instanceof Array,
+        !!seenIndexes &&
+        !!seenIndexes.data &&
+        seenIndexes.data instanceof Array &&
+        seenIndexes.data,
     });
   }
 
@@ -39,7 +42,8 @@ class Fib extends Component {
 
   renderSeenIndexes() {
     return (
-      this.state.seenIndexes &&
+      !!this.state.seenIndexes &&
+      this.state.seenIndexes instanceof Array &&
       this.state.seenIndexes.map(({ number }) => number).join(", ")
     );
   }
