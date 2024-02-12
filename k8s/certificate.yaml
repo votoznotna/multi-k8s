@@ -12,3 +12,10 @@ spec:
   dnsNames:
     - votoznotna.com
     - www.votoznotna.com
+  acme:
+    config:
+      - http01:
+          ingressClass: nginx
+        domains:
+          - votoznotna.com
+          - www.votoznotna.com
